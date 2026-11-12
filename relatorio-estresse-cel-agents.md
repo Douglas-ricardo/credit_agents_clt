@@ -89,5 +89,3 @@ Funcionou: validação de CPF (dígito verificador), e-mail, celular (DDD e 9), 
 - [ ] Publicar a massa de teste do fluxo sem leilão com o cenário de cada CPF (P7)
 - [ ] Paginar ou resumir as respostas grandes (P2) e devolver código de erro e ID de requisição (P4)
 - [ ] Arquivar o projeto de QA de teste `872bdf0c-0733-4122-be6e-0e405283210c`, ou expor uma ferramenta para isso (P5)
-
-Detalhes, horários e hipóteses H1-H8: `friction-log-leigo.md` (travas T1-T23).

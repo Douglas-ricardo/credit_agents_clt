@@ -12,7 +12,6 @@ Protótipo navegável do fluxo de **Crédito do Trabalhador** (consignado CLT, s
 | `build.py` | Gera `app/*.html` a partir de `screens/`: liga a navegação entre telas e guarda o estado em `sessionStorage` |
 | `app/` | App estático pronto para abrir no navegador. O ponto de entrada é `app/index.html` |
 | `PROMPTS-LEIGO.md` | Roteiro de prompts (P0 a P10) do teste com a persona de usuário leigo |
-| `friction-log-leigo.md` | Registro das travas e dos resultados de cada prompt |
 | `relatorio-estresse-cel-agents.md` | Relatório do teste de estresse do MCP: bloqueios, problemas e pedidos ao time Celcoin |
 
 ## Como rodar
