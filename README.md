@@ -44,7 +44,8 @@ Cenários simulados por parâmetro de URL, por exemplo `?margem=sem` (sem margem
 
 - **Bloqueio principal:** `execute_cel_credit_sandbox_action` responde "A execução no sandbox Celcoin está desativada", embora a permissão apareça concedida. Por isso a jornada real (consentimento, margem, simulação, CCB, assinatura, desembolso, webhooks) e a homologação de QA (17 itens, todos exigem chamada real ao sandbox) não puderam ser exercitadas.
 - **O que funcionou:** Studio (leitura), documentação, sandbox geral, QA (caminhos de erro) e concorrência.
-- **Achados do app:** acesso direto a uma tela sem estado volta à primeira tela sem mensagem; agência e conta aceitam valores inválidos; a simulação usa fórmula local, não `/preview`.
+- **Achados do app:** acesso direto a uma tela sem estado volta à primeira tela sem mensagem; a simulação usa fórmula local, não `/preview`; Proposta recusada abre sem proposta.
+- **Revalidação (2026-11-12):** o fluxo completo foi percorrido com cliques e digitação reais, sem erro. Corrigidos o logo quebrado e a seta de voltar de Parcelas. Detalhes no relatório.
 
 Detalhes completos em [`relatorio-estresse-cel-agents.md`](relatorio-estresse-cel-agents.md).
 

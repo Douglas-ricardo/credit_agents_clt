@@ -64,11 +64,24 @@ App estático montado a partir das 16 telas do Studio (`app/`), com dados fictí
 |------|--------|
 | Alta | Acesso direto a uma tela, ou estado perdido, volta para a primeira tela **sem mensagem**. É a origem provável do "erro" relatado entre Dados bancários e Validação. O estado vive só na aba: abrir em outra aba perde o fluxo |
 | Alta | Validação de identidade e assinatura são simuladas: não há link da Única nem câmera (depende da etapa 5) |
-| Média | Agência aceita "0"; conta aceita "1" sem dígito |
+| Média | Agência aceita "0"; conta aceita "1" sem dígito. **Não reproduzido em 12/11:** com agência "0" e conta "1" o botão Continuar ficou desabilitado (verificado por script, sem digitar) |
 | Média | A simulação usa fórmula local, não `/preview`; os valores não foram conferidos com a Celcoin |
 | Baixa | Valor negativo na simulação vira positivo sem aviso ("-50" vira R$ 50,00) |
 | Baixa | CEP só preenche a partir de uma tabela local com poucos CEPs |
 | Baixa | "Proposta recebida" e "Proposta recusada" abrem sem nenhuma proposta e mostram a mensagem de sucesso ou falha |
+
+### Revalidação em 2026-11-12 (cliques e digitação reais no navegador)
+
+Fluxo completo sem erro: Autorização → Consultando → Ofertas → Simulação (R$ 200,00 em 24x → R$ 3.552,59) → Resumo (lista "Ver todas") → Cadastro → Endereço (CEP preenche sozinho) → Dados bancários (busca de banco, máscara da conta, Pix) → Identidade → Validando → Proposta recebida (CCB 551504434) → Meus empréstimos (abas Todos/Pendentes/Finalizados) → Contrato (valores batem com a simulação) → Parcelas. Também clicados: "Baixar CCB" (só mostra aviso de protótipo), "Simular crédito", e os botões de Sem margem e Recusada. Sem testes negativos, por falta de CPFs de teste.
+
+| Sev. | Achado novo | Situação |
+|------|-------------|----------|
+| Média | Logo do projeto quebrado em Sem margem, Recusada, Proposta recebida e Meus empréstimos: o `src` é `studio-branding://project-logo`, que só resolve dentro do Studio | Corrigido: o `build.py` remove o `<img>`. Falta o arquivo real do logo para reintroduzi-lo |
+| Baixa | Seta de voltar em Parcelas vem rotulada "Contrato", mas levava a Meus empréstimos | Corrigido: volta ao Contrato mantendo o `?id=` |
+| Baixa | O cenário `?margem=sem` fica salvo na sessão e leva a "Sem margem" mesmo sem o parâmetro; é preciso limpar o `sessionStorage` | Aberto |
+| Baixa | Nenhum botão do fluxo leva a Parcelas; só a URL | Aberto (pode ser intencional, contrato pendente de averbação) |
+
+Confirmados de novo: Proposta recusada abre direto, sem proposta; acesso direto a tela intermediária volta para a Autorização sem mensagem. Continuam sem cobertura: validações negativas, a aparência de cada tela em outros tamanhos de janela e toda chamada à API da Celcoin (B1).
 
 Funcionou: validação de CPF (dígito verificador), e-mail, celular (DDD e 9), chave aleatória (UUID), nome da mãe (nome e sobrenome, só letras), nacionalidade, parcela mínima (R$ 30) e máxima (a margem), prazos de 6x a 72x, cenários "sem margem" e "recusada".
 

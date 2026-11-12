@@ -236,7 +236,7 @@ body{font-family:var(--studio-font-family)}
 </main>
 <script>
 window.__Q = location.search.slice(1);
-window.CT_CFG = {"id": "simulacao", "fluxo": "contratacao", "step": 3, "total": 8, "back": "ofertas.html", "home": "autorizacao.html", "links": {"next": "resumo.html", "sim": "simulacao.html", "ofertas": "ofertas.html", "sem": "sem-margem.html", "ok": "recebida.html", "recusada": "recusada.html", "simular": "autorizacao.html", "contrato": "contrato.html", "assinar": "validando.html", "parcelas": "parcelas.html", "pagamento": "parcelas.html"}, "logo": ""};
+window.CT_CFG = {"id": "simulacao", "fluxo": "contratacao", "step": 3, "total": 8, "back": "ofertas.html", "home": "autorizacao.html", "links": {"next": "resumo.html", "sim": "simulacao.html", "ofertas": "ofertas.html", "sem": "sem-margem.html", "ok": "recebida.html", "recusada": "recusada.html", "simular": "autorizacao.html", "contrato": "contrato.html", "assinar": "validando.html", "parcelas": "parcelas.html", "pagamento": "parcelas.html"}, "logo": "", "keepq": false};
 </script>
 <script>
 /* Crédito do Trabalhador — sem leilão · código compartilhado por todas as telas.
@@ -602,7 +602,7 @@ window.CT_CFG = {"id": "simulacao", "fluxo": "contratacao", "step": 3, "total": 
   function header() {
     var h = $("[data-ct-header]"); if (!h) return;
     if (CFG.stepLabel) $("[data-ct-step-label]", h).textContent = CFG.stepLabel;
-    var cnt = $("[data-ct-step-count]", h); if (!cnt) { $$("[data-ct-back]").forEach(function (b) { b.href = CFG.back || CFG.home; }); return; } cnt.textContent = CFG.step + "/" + CFG.total;
+    var cnt = $("[data-ct-step-count]", h); if (!cnt) { $$("[data-ct-back]").forEach(function (b) { b.href = (CFG.back || CFG.home) + (CFG.keepq && window.__Q ? "?" + window.__Q : ""); }); return; } cnt.textContent = CFG.step + "/" + CFG.total;
     var bar = $('[data-slot="progress"]', h), ind = $('[data-slot="progress-indicator"]', h);
     var v = Math.round((CFG.step / CFG.total) * 100), prevV = Math.round(((CFG.step - 1) / CFG.total) * 100);
     /* Mesmos atributos que o StepProgress do DS põe no contêiner. */
@@ -611,7 +611,7 @@ window.CT_CFG = {"id": "simulacao", "fluxo": "contratacao", "step": 3, "total": 
     sp.setAttribute("aria-label", "Etapa " + CFG.step + " de " + CFG.total + ": " + $("[data-ct-step-label]", h).textContent);
     ind.style.transform = "translateX(-" + (100 - prevV) + "%)";
     requestAnimationFrame(function () { requestAnimationFrame(function () { ind.style.transform = "translateX(-" + (100 - v) + "%)"; }); });
-    $$("[data-ct-back]").forEach(function (b) { b.href = CFG.back || CFG.home; });
+    $$("[data-ct-back]").forEach(function (b) { b.href = (CFG.back || CFG.home) + (CFG.keepq && window.__Q ? "?" + window.__Q : ""); });
   }
   function footerElevation() {
     var sc = $(".app-scroll"), ft = $(".app-footer"); if (!sc || !ft) return;
